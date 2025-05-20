@@ -1,0 +1,14 @@
+{{- if not .Values.localdev }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.appid }}
+  namespace: {{ .Values.appid }}
+spec:
+  storageClassName: {{ .Values.storageclass }}
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.storage }}
+{{- end }}

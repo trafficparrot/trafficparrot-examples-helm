@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.appid }}
+  name: {{.Values.appid}}
+  labels:
+    app: {{ .Values.appid }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.appid }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appid }}
+    spec:
+      containers:
+      - image: {{ .Values.image }}
+        imagePullPolicy: Always
+        name: {{ .Values.appid }}
+        ports:
+        - containerPort: {{ .Values.uiport }}
+          name: ui-port
+        - containerPort: {{ .Values.httpvsport }}
+          name: http-vs-port
+        - containerPort: {{ .Values.grpcvsport }}
+          name: grpc-vs-port

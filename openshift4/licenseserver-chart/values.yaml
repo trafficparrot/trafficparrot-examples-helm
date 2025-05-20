@@ -1,0 +1,10 @@
+appid: trafficparrot-license-usage
+image: trafficparrot-license-usage:latest
+uiport: 8050
+uitermination: edge
+usageport: 8040
+port: 5552
+usagetermination: passthrough
+storage: 1Gi
+storageclass: example
+localdev: true

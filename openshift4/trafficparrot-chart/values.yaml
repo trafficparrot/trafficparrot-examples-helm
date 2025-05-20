@@ -1,0 +1,7 @@
+appid: trafficparrot
+image: trafficparrot:latest
+uiport: 8080
+uitermination: edge
+httpvsport: 8081
+grpcvsport: 5552
+vstermination: passthrough

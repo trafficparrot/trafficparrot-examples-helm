@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.appid }}
+  name: {{.Values.appid}}
+  labels:
+    app: {{ .Values.appid }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.appid }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appid }}
+    spec:
+      volumes:
+        - name: data-volume
+          {{- if .Values.localdev }}
+          emptyDir: {}
+          {{- else }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.appid }}
+          {{- end }}
+      containers:
+      - image: {{ .Values.image }}
+        imagePullPolicy: Always
+        name: {{ .Values.appid }}
+        ports:
+        - containerPort: {{ .Values.uiport }}
+          name: ui-port
+        - containerPort: {{ .Values.usageport }}
+          name: usage-port
+        volumeMounts:
+          - mountPath: /opt/trafficparrot-license-usage/data
+            name: data-volume

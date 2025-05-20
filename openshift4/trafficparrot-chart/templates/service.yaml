@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.appid }}
+  namespace: {{ .Values.appid }}
+  labels:
+    app: {{ .Values.appid }}
+spec:
+  ports:
+  - port: {{ .Values.uiport }}
+    targetPort: {{ .Values.uiport }}
+    name: ui-port
+    protocol: TCP
+  - port: {{ .Values.httpvsport }}
+    targetPort: {{ .Values.httpvsport }}
+    name: http-vs-port
+    protocol: TCP
+  - port: {{ .Values.grpcvsport }}
+    targetPort: {{ .Values.grpcvsport }}
+    name: grpc-vs-port
+    protocol: TCP
+  selector:
+    app: {{ .Values.appid }}

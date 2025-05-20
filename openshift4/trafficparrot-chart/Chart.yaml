@@ -1,0 +1,6 @@
+apiVersion: v2
+appVersion: 1.0.0
+description: Traffic Parrot Helm Chart
+name: traffic-parrot
+type: application
+version: 1.0.0

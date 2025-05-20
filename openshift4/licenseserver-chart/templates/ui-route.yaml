@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ .Values.appid }}-ui
+  namespace: {{ .Values.appid }}
+spec:
+  port:
+    targetPort: ui-port
+  to:
+    kind: Service
+    name: {{ .Values.appid }}
+  tls:
+    termination: {{ .Values.uitermination }}
+    insecureEdgeTerminationPolicy: None
